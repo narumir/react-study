@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardHeader } from "@material-ui/core";
-import React, { FC, useContext } from "react";
+import React, { FC, memo, useContext } from "react";
 import { ActionType, TaskContext } from "./task-provider";
 
 
@@ -30,3 +30,5 @@ export const TaskItem: FC<Props> = ({
     </Card>
   );
 };
+
+export const TaskItemMemo = memo(TaskItem);

@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useContext } from "react";
-import { TaskItem } from "./task-item";
+import { TaskItem, TaskItemMemo } from "./task-item";
 import { TaskContext } from "./task-provider";
 
 export const TaskList: FC = () => {
@@ -7,7 +7,7 @@ export const TaskList: FC = () => {
   return (
     <Fragment>
       {tasks.map((task) => (
-        <TaskItem
+        <TaskItemMemo
           key={task.id}
           id={task.id}
           complete={task.complete}
