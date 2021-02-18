@@ -7,15 +7,13 @@ import {
 import {
   TaskContextProvider,
 } from './task-provider';
+import { ThemeContextProvider } from './theme-provider';
 
-const theme = createMuiTheme({
-  palette: {
-    type: "dark"
-  }
-});
 ReactDOM.render(
-  <TaskContextProvider>
-    <App />
-  </TaskContextProvider>,
+  <ThemeContextProvider>
+    <TaskContextProvider>
+      <App />
+    </TaskContextProvider>
+  </ThemeContextProvider>,
   document.getElementById('root')
 );
