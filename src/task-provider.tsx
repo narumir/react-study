@@ -1,4 +1,9 @@
-import { createContext, Dispatch, FC, useReducer } from "react";
+import {
+  FC,
+  Dispatch,
+  createContext,
+  useReducer,
+} from "react";
 
 export enum ActionType {
   ADD_TASK = "add_task",
@@ -29,29 +34,22 @@ export type Action =
 export const taskReducer = (state: Task[], action: Action) => {
   switch (action.type) {
     case ActionType.ADD_TASK: {
-      const add: Task = {
+      state.push({
         id: Date.now().toString(),
         content: action.content,
         complete: false,
-      }
-      return [
-        ...state,
-        add,
-      ];
+      });
+      return [...state];
     }
     case ActionType.COMPLETE_TASK: {
       const idx = state.findIndex((val) => val.id === action.id);
       state[idx].complete = true;
-      return [
-        ...state
-      ];
+      return [...state];
     }
     case ActionType.DELETE_TASK: {
       const idx = state.findIndex((val) => val.id === action.id);
       state.splice(idx, 1);
-      return [
-        ...state,
-      ]
+      return [...state];
     }
   }
 };
@@ -59,7 +57,7 @@ export const taskReducer = (state: Task[], action: Action) => {
 export type TaskContextProps = {
   tasks: Task[];
   dispatch: Dispatch<Action>;
-}
+};
 
 export const TaskContext = createContext<TaskContextProps>({ tasks: [], dispatch: () => { } });
 
