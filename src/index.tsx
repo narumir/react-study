@@ -1,19 +1,11 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-  App,
-} from './App';
-import {
-  TaskContextProvider,
-} from './task-provider';
-import { ThemeContextProvider } from './theme-provider';
+import React from "react";
+import ReactDom from "react-dom";
 
-ReactDOM.render(
-  <ThemeContextProvider>
-    <TaskContextProvider>
-      <App />
-    </TaskContextProvider>
-  </ThemeContextProvider>,
-  document.getElementById('root')
+const element = (
+  <React.StrictMode>
+    hello world
+  </React.StrictMode>
 );
+const container = document.getElementById("root");
+
+ReactDom.render(element, container);
