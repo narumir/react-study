@@ -1,17 +1,39 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ForkTSCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const {
+  ProvidePlugin,
+} = require("webpack");
 
 const htmlPlugin = new HTMLWebpackPlugin({
   template: "public/index.html",
+  inject: true,
+  minify: {
+    removeComments: true,
+    collapseWhitespace: true,
+    removeRedundantAttributes: true,
+    useShortDoctype: true,
+    removeEmptyAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    keepClosingSlash: true,
+    minifyJS: true,
+    minifyCSS: true,
+    minifyURLs: true,
+  },
 });
-const tsPlugin = new ForkTSCheckerWebpackPlugin();
+const typeCheckerPlugin = new ForkTSCheckerWebpackPlugin({});
+const providerPlugin = new ProvidePlugin({
+  React: 'react',
+});
 
 module.exports = {
   mode: "development",
   entry: "./src/index.tsx",
   output: {
     filename: "[name].[fullhash].js",
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', ".json"],
   },
   module: {
     rules: [
@@ -40,7 +62,8 @@ module.exports = {
   },
   plugins: [
     htmlPlugin,
-    tsPlugin,
+    typeCheckerPlugin,
+    providerPlugin,
   ],
   devServer: {
     host: "localhost",
